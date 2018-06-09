@@ -1,0 +1,80 @@
+/* rendu général */
+.wrapper{
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-image: url('img/trianglify.png');
+    background-size: cover ;
+    background-repeat: no-repeat;
+}
+h1{
+    text-shadow: darkblue 0px 0px 8px;
+    font-size: 4em;
+}
+.exosBox{
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+.exo{
+    min-width: 199px;
+    min-height: 20%;
+    max-width: 30%;
+    max-height: 60%;
+    background-color: hsla(267, 100%, 50%, 0.1);
+    border: 0px solid #0d0807;
+    border-radius: 20px;
+    box-shadow: 8px 8px 2px 1px rgba(0, 0, 255, .2);
+    margin: 10px 10px;
+}
+h2{
+    text-align: center;
+    margin: 20px;
+    font-size: 2em;
+}
+p{
+    font-size: 1.5em;
+    margin: 15px 10% 15px 50%;
+}
+p:first-of-type{
+    text-align: center;
+    margin: 20px 5% 20px 10%;
+    text-shadow: #736F78 0 2px 8px;
+}
+img{
+    width: 27%;
+    margin: 15px 10px;
+    float: left;
+}
+input{
+    width: 60%;
+    padding: 12px 5%;
+    margin: 8px 20%;
+    box-sizing: border-box;
+    font-size: 1.3rem;
+}
+input:focus{
+    background-color: lightgrey;
+}
+button{
+    height: 70px;
+    width: 70px;
+    border-radius: 100%;
+    margin: 30px 40%;
+    box-sizing: border-box;
+}
+button:hover{
+    background: rgb(228,29,12);
+    background: radial-gradient(circle, rgba(228,29,12,1) 0%, rgba(225,55,17,1) 4%, rgba(224,115,19,1) 8%, rgba(222,162,21,0.9808123078332895) 12%, rgba(245,254,22,0.9976190305223652) 18%, rgba(251,228,2,0.7427170697380514) 24%, rgba(91,82,221,0.8463585263206845) 31%, rgba(145,113,203,1) 43%, rgba(186,76,143,1) 59%, rgba(221,182,192,1) 80%, rgba(233,148,150,1) 97%, rgba(27,26,26,0.6418767336035978) 100%);
+}
+button:active{
+    background: rgb(228,12,71);
+    background: radial-gradient(circle, rgba(228,12,71,1) 0%, rgba(225,17,126,1) 4%, rgba(170,19,224,1) 14%, rgba(68,21,222,0.9808123078332895) 25%, rgba(22,225,254,0.9976190305223652) 57%, rgba(57,175,127,1) 84%, rgba(127,143,133,0.9892156691778273) 100%);
+}
+
+
