@@ -260,71 +260,81 @@ bouton7.addEventListener('click', (event) => {
 
 
 //Exo8__________________________________________________________________________
-var exo8 = document.getElementsByClassName('exo')[7], lexiqBrutal = new Object(), champText8, bouton8;
+var exo8 = document.getElementsByClassName('exo')[7], brutalLexiq = new Object(), champText8, bouton8;
+
+
 //Dans le but qu'un jour, ça serve à quelque-chose________
-lexiqBrutal = {sep: {".": "virgule"}, unities: {0: "zéro", 1: "un", 2: "deux", 3: "trois", 4: "quatre", 5: "cinq", 6: "six", 7: "sept", 8: "huit", 9: "neuf"}, dozens: {11: "onze", 12: "douze", 13: "treize", 14: "quatorze", 15: "quinze", 16: "seize"}, factor10: {10: "dix", 20: "vingt", 30: "trente", 40: "quarante", 50: "cinquante", 60: "soixante"}, factor100: {100: "cent", 1000: "mille", 1000000: "million", 1000000000: "milliard"}};
+brutalLexiq = {sep: {".": "virgule"}, unities: {0: "zéro", 1: "un", 2: "deux", 3: "trois", 4: "quatre", 5: "cinq", 6: "six", 7: "sept", 8: "huit", 9: "neuf"}, dozens: {11: "onze", 12: "douze", 13: "treize", 14: "quatorze", 15: "quinze", 16: "seize"}, factor10: {10: "dix", 20: "vingt", 30: "trente", 40: "quarante", 50: "cinquante", 60: "soixante"}, factor100: {100: "cent", 1000: "mille", 1000000: "million", 1000000000: "milliard"}};
+
+
+/*Ecriture des éléments dans le DOM*/
 
 champText8 = document.createElement('INPUT');
 bouton8 = document.createElement('BUTTON');
-
 champText8.setAttribute('value', 'Your choice, use a dot for floats');
-
 exo8.appendChild(champText8);
 exo8.appendChild(bouton8);
 
 
+/*Accrochages d'events aux clics*/
 
 champText8.addEventListener('click', event => {
     champText8.value = "";
 });
 bouton8.addEventListener('click', event => {
-    var choice = champText8.value, splittedChoice =  choice.split(""), newP8, word, textToWrite;
+    var choice = champText8.value, splittedChoice =  choice.split(""), newP8, word_s, textToWrite;
 
     if (choice<0 || choice>5) {
-        alert('Tu avais pourtant 5000000 possibilités de tomber juste');
+        alert('Tu as pourtant 5000000 possibilités de tomber juste');
     }
     else if (choice == ""|| choice == "Your choice, use a dot for floats"){
         alert("C'mon Man");
     }
+    else if (isNaN(choice)) {
+        alert("chiffres\nET/OU\npoint");
+    }
     else {
         newP8 = document.createElement('P');
 
-        word = translateToFr(choice);
+        word_s = translateToFr(choice, splittedChoice, brutalLexiq);
 
-        textToWrite = document.createTextNode(word);
-
-
+        textToWrite = document.createTextNode(word_s);
         newP8.appendChild(textToWrite);
         exo8.appendChild(newP8);
     }
-    console.log("__________________________________");
-    console.log("choice = "+choice);
-    console.log("modulo de choice par lui-même = "+choice%1);
-    console.log("splittedChoice = "+splittedChoice);
     champText8.value = "Your choice, use a dot for floats";
-
-
 });
 
-function translateToFr(choice, splittedChoice) {
-    var numKey, word = "";
 
-    //Pour construire word à afficher, concaténer chaque caractère traduit en fr
+/*Fonction 'Transcription d'input numérique en français'*/
+
+function translateToFr(choice, splittedChoice, brutalLexiq) {
+    var valKey, word_s = "";;
+
+    console.log("choice = "+choice);
+    console.log("splittedChoice = "+splittedChoice);
+
+    //Pour construire word à afficher, concaténer chaque valeur correspondant à chaque valKey entrée (mot correspondant au caractère numérique) traduit en fr
     for (var i = 0; i < splittedChoice.length; i++) {
-        numKey = splittedChoice[i];
-        if (numKey == ".") {
-            word += "virgule ";
+
+        valKey = splittedChoice[i];
+
+        console.log("valKey = "+ valKey);
+        console.log("parseInt(valKey) = "+parseInt(valKey));
+
+        if (valKey == ".") {
+            word_s += "Virgule ";
         }
         else {
-            word += lexiqBrutal.unities.numKey;
+            word_s += brutalLexiq.unities[valKey]+" ";
         }
+        console.log("constructeur de word = "+word_s);
     }
-
-    console.log("_______________ dans la foncion");
-    console.log(splittedChoice);
-    console.log(splittedChoice.indexOf('.'));
-    return word;
+    return  word_s;
 };
+
+
+
 
 
 //Exo9__________________________________________________________________________
