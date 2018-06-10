@@ -373,50 +373,146 @@ bouton9.addEventListener('click', (event) => {
 
 
 //Exo10 et 11__________________________________________________________________________
-var exo10 = document.getElementsByClassName('exo')[9], hotSpot, champText10_1, champText10_2, bouton10;
+var exo10 = document.getElementsByClassName('exo')[9], labelInput, labelToWrite,champText10_1, consigne, consigneToWrite,  champText10_2,  bouton10_1, bouton10_2;
 
+labelInput = document.createElement('LABEL');
+labelToWrite = document.createTextNode('La taille de ton univers est de : ');
 champText10_1 = document.createElement('INPUT');
+bouton10_1 = document.createElement('BUTTON');
+consigne = document.createElement('P');
+consigneToWrite = document.createTextNode("Trouve le hotspot avant de changer de taille d'univers");
 champText10_2 = document.createElement('INPUT');
-bouton10 = document.createElement('BUTTON');
+bouton10_2 = document.createElement('BUTTON');
 
-champText10_1.setAttribute('value', 'Choose well');
-champText10_2.setAttribute('value', 'How big is your universe ?');
+champText10_1.setAttribute('value', 100);
+champText10_2.setAttribute('value', 'Choose well');
 
+exo10.appendChild(labelToWrite);
+exo10.appendChild(labelInput);
 exo10.appendChild(champText10_1);
+exo10.appendChild(bouton10_1);
+consigne.appendChild(consigneToWrite);
+exo10.appendChild(consigne);
 exo10.appendChild(champText10_2);
-exo10.appendChild(bouton10);
+exo10.appendChild(bouton10_2);
 
-hotSpot = Math.floor(Math.random()*Math.floor(1000));
-console.log(hotSpot);
 
-champText10.addEventListener('click', ev => {
-    champText10.value = "";
+var uDefault = 100, hotSpotDefault = Math.floor(Math.random()*Math.floor(uDefault)), universe, hotSpot;
+
+champText10_1.addEventListener('click', ev => {
+    champText10_1.value = "";
 });
-bouton10.addEventListener('click', ev => {
-    var choice = champText10.value;
-    console.log(limitSpot(choice, 3.6));
-    if (isNaN(choice) || choice == ""){
+bouton10_1.addEventListener('click', ev => {
+    var lastU = champText10_1.value;
+
+    if (lastU == "" || (lastU != "" && isNaN(lastU)) || lastU == 0){
+        universe = uDefault;
+        hotSpot = hotSpotDefault;
+    }
+    else {
+        universe = champText10_1.value;
+        hotSpot = Math.floor(Math.random()*Math.floor(universe));
+    }
+    champText10_1.value = universe;
+
+    console.log('universe = '+universe);
+    console.log(buildMarginGuides(universe));
+    console.log('hotSpot = ' +hotSpot);
+});
+
+
+var buildMarginGuides = function (universe) {
+    var tooFar = universe*(4/5),
+        farCloser = universe*(3/5),
+        closeFar = universe*(2/5),
+        soClose = universe*(1/5);
+    return [soClose, closeFar, farCloser, tooFar];
+};
+
+
+champText10_2.addEventListener('click', ev => {
+    champText10_2.value = "";
+});
+bouton10_2.addEventListener('click', ev => {
+    var universe = champText10_1.value, choice = champText10_2.value, totalClick = 0,
+        howFar = Math.abs(hotSpot-choice);
+
+    var marginGuides = buildMarginGuides(universe),
+        soClose = marginGuides[0],
+        closeFar = marginGuides[1],
+        farCloser = marginGuides[2],
+        tooFar = marginGuides[3];
+
+    console.log('____________________');
+    console.log('universe = '+universe);
+    console.log(marginGuides);
+    console.log('hotSpot = ' +hotSpot);
+    console.log('choice ='+choice);
+    console.log('howFar ='+howFar);
+    
+    
+    if (choice == "" || isNaN(choice)){
         alert("Un nombre entier. Fais pas le malin, ou on arrondit le jeu aux centièmes");
     }
-    else
-    {
-        if (choice > limitSpot(choice, 3.6)){
-            alert("BRULANT");
+    else if (choice > universe || choice < 0){
+        alert("Si tu vises hors-cible, tu ne risques pas de toucher...");
+    }
+    else {
+        totalClick += 1;
+
+        if (howFar == 0){
+            alert('gagné');
+            console.log('gagné');
         }
-        else if (choice < limitSpot(choice, 3.6)) {
-            alert("Fiuuuuuuuuuu");
+        else if (howFar > 0 && howFar <= soClose){
+            alert('Brûlant!');
+        }
+        else if (howFar > soClose && howFar <= closeFar){
+            alert('Chaud');
+        }
+        else if (howFar > closeFar && howFar <= farCloser){
+            alert('Plus chaud que froid');
+        }
+        else if (howFar > farCloser && howFar <= tooFar){
+            alert('Plus froid que chaud');
+        }
+        else if (howFar > tooFar){
+            alert('Glacé!');
+        }
+
+        /*if (howFar > tooFar){
+            alert('Glacé!');
+            console.log('glacé');
+        }
+        else if (tooFar >= howFar > farCloser){
+            alert('Plus froid que chaud');
+            console.log('froid2');
+
+        }
+        else if (farCloser > howFar >= closeFar){
+            alert('Plus chaud que froid');
+            console.log('froid 1');
+
+        }
+        else if (closeFar > howFar >= soClose){
+            alert('Chaud');
+            console.log('chaud');
+
+        }
+        else if (soClose > howFar > 0){
+            alert('Brûlant!');
+            console.log('brûlant');
+
         }
         else {
-            alert("Gagné!");
-        }
+            alert('Gagné en '+totalClick+' coups!!!!!');
+            console.log('gagné');
+
+        }*/
     }
-    champText10.value = "Choose well";
+    champText10_2.value = "Choose well";
 });
 
-
-function limitSpot(choice, factor) {
-    return Math.abs(hotSpot-choice)/factor;
-};
 
 
 
