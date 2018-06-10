@@ -309,18 +309,13 @@ bouton8.addEventListener('click', event => {
 /*Fonction 'Transcription d'input numérique en français'*/
 
 function translateToFr(choice, splittedChoice, brutalLexiq) {
-    var valKey, word_s = "";;
-
-    console.log("choice = "+choice);
-    console.log("splittedChoice = "+splittedChoice);
+    var valKey, word_s = "";
 
     //Pour construire word à afficher, concaténer chaque valeur correspondant à chaque valKey entrée (mot correspondant au caractère numérique) traduit en fr
     for (var i = 0; i < splittedChoice.length; i++) {
 
         valKey = splittedChoice[i];
 
-        console.log("valKey = "+ valKey);
-        console.log("parseInt(valKey) = "+parseInt(valKey));
 
         if (valKey == ".") {
             word_s += "Virgule ";
@@ -328,7 +323,6 @@ function translateToFr(choice, splittedChoice, brutalLexiq) {
         else {
             word_s += brutalLexiq.unities[valKey]+" ";
         }
-        console.log("constructeur de word = "+word_s);
     }
     return  word_s;
 };
@@ -338,19 +332,92 @@ function translateToFr(choice, splittedChoice, brutalLexiq) {
 
 
 //Exo9__________________________________________________________________________
-var exo9 = document.getElementsByClassName('exo')[8];
+var exo9 = document.getElementsByClassName('exo')[8], champText9, bouton9, newDiv9, newUl9;
+
+champText9 = document.createElement('INPUT');
+bouton9 = document.createElement('BUTTON');
+newDiv9 = document.createElement('DIV');
+newUl9 = document.createElement('UL');
+
+champText9.setAttribute('value', 'Next most important thing');
+newDiv9.setAttribute('class', 'shopList');
+
+exo9.appendChild(champText9);
+exo9.appendChild(bouton9);
+newDiv9.appendChild(newUl9);
+exo9.appendChild(newDiv9);
+
+
+champText9.addEventListener('click', ev => {
+   champText9.value = "";
+});
+bouton9.addEventListener('click', (event) => {
+    if (champText9.value != "" && champText9.value != "More more more" && champText9.value != "Next most important thing") {
+        var newLI9 = document.createElement('LI'),
+            ajout = champText9.value;
+        textToWrite = document.createTextNode(ajout);
+
+        newLI9.appendChild(textToWrite);
+        newUl9.appendChild(newLI9);
+
+        champText9.value = "More more more";
+    }
+    else {
+        champText9.value = "Next most important thing";
+    }
+});
 
 
 
 
 
-//Exo10__________________________________________________________________________
-var exo10 = document.getElementsByClassName('exo')[9];
+
+//Exo10 et 11__________________________________________________________________________
+var exo10 = document.getElementsByClassName('exo')[9], hotSpot, champText10_1, champText10_2, bouton10;
+
+champText10_1 = document.createElement('INPUT');
+champText10_2 = document.createElement('INPUT');
+bouton10 = document.createElement('BUTTON');
+
+champText10_1.setAttribute('value', 'Choose well');
+champText10_2.setAttribute('value', 'How big is your universe ?');
+
+exo10.appendChild(champText10_1);
+exo10.appendChild(champText10_2);
+exo10.appendChild(bouton10);
+
+hotSpot = Math.floor(Math.random()*Math.floor(1000));
+console.log(hotSpot);
+
+champText10.addEventListener('click', ev => {
+    champText10.value = "";
+});
+bouton10.addEventListener('click', ev => {
+    var choice = champText10.value;
+    console.log(limitSpot(choice, 3.6));
+    if (isNaN(choice) || choice == ""){
+        alert("Un nombre entier. Fais pas le malin, ou on arrondit le jeu aux centièmes");
+    }
+    else
+    {
+        if (choice > limitSpot(choice, 3.6)){
+            alert("BRULANT");
+        }
+        else if (choice < limitSpot(choice, 3.6)) {
+            alert("Fiuuuuuuuuuu");
+        }
+        else {
+            alert("Gagné!");
+        }
+    }
+    champText10.value = "Choose well";
+});
+
+
+function limitSpot(choice, factor) {
+    return Math.abs(hotSpot-choice)/factor;
+};
 
 
 
-
-
-//Exo11__________________________________________________________________________
-var exo11 = document.getElementsByClassName('exo')[10];
 
