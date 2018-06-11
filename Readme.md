@@ -1,6 +1,6 @@
 ![Javascript](https://i.gifer.com/8OGO.gif)
 
-![html](https://htmlpreview.github.io/?https://github.com/SeriousJack666/Exos-Javascript-Serie/blob/master/index.html)
+![html](https://github.com/SeriousJack666/Exos-Javascript-Serie/blob/master/index.html)
 
 ### EXERCICE 1
 * demander deux nombres à l'utilisateur (dans deux champs distincts)
