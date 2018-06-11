@@ -1,5 +1,5 @@
 ![Javascript](https://i.gifer.com/8OGO.gif)
-![Preview](https://htmlpreview.github.io/?https://github.com/SeriousJack666/Exos-Javascript-Serie/blob/master/index.html)
+![a link](https://htmlpreview.github.io/?https://github.com/SeriousJack666/Exos-Javascript-Serie/blob/master/index.html)
 
 
 ### EXERCICE 1
